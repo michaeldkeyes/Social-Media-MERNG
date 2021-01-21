@@ -65,6 +65,7 @@ module.exports = {
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
+
       // Make sure user doesnt already exist
       const user = await User.findOne({ username });
       if (user) {
@@ -74,6 +75,7 @@ module.exports = {
           },
         });
       }
+
       // Hash password and create an auth token
       password = await bcrypt.hash(password, 12);
 
