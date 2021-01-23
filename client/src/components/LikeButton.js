@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { Button, Icon, Label } from "semantic-ui-react";
 
+import MyPopup from "../util/MyPopup";
+
 export default function LikeButton({ user, post: { id, likeCount, likes } }) {
   const [liked, setLiked] = useState(false);
 
@@ -35,12 +37,14 @@ export default function LikeButton({ user, post: { id, likeCount, likes } }) {
   );
 
   return (
-    <Button as="div" labelPosition="right" onClick={likePost}>
-      {likeButton}
-      <Label basic color="teal" pointing="left">
-        {likeCount}
-      </Label>
-    </Button>
+    <MyPopup content={liked ? "Unlike" : "Like"}>
+      <Button as="div" labelPosition="right" onClick={likePost}>
+        {likeButton}
+        <Label basic color="teal" pointing="left">
+          {likeCount}
+        </Label>
+      </Button>
+    </MyPopup>
   );
 }
 
